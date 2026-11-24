@@ -1,0 +1,239 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public creator profile document without PII.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "displayName": { "type": "string" },
+        "bio": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "followersCount": { "type": "integer" },
+        "followingCount": { "type": "integer" },
+        "totalLikes": { "type": "integer" },
+        "privateAccount": { "type": "boolean" },
+        "accountStatus": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "username", "displayName", "followersCount", "followingCount", "totalLikes", "privateAccount", "accountStatus", "createdAt", "updatedAt"]
+    },
+    "PrivateUserInfo": {
+      "title": "PrivateUserInfo",
+      "description": "Private PII and FCM token scoped to the account owner.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "fcmToken": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "updatedAt"]
+    },
+    "BlockedUser": {
+      "title": "BlockedUser",
+      "description": "User block record owned by the blocking user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "blockedUid": { "type": "string" },
+        "blockedUsername": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "blockedUid", "blockedUsername", "createdAt"]
+    },
+    "UserNotification": {
+      "title": "UserNotification",
+      "description": "Inbox notification item for likes, comments, followers, mentions, and messages.",
+      "type": "object",
+      "properties": {
+        "recipientId": { "type": "string" },
+        "actorId": { "type": "string" },
+        "actorUsername": { "type": "string" },
+        "type": { "type": "string", "enum": ["LIKE", "COMMENT", "FOLLOW", "MENTION", "MESSAGE"] },
+        "videoId": { "type": "string" },
+        "message": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["recipientId", "actorId", "actorUsername", "type", "message", "read", "createdAt"]
+    },
+    "VideoPost": {
+      "title": "VideoPost",
+      "description": "Published short video post with playback, editor metadata, and engagement counters.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "creatorUsername": { "type": "string" },
+        "creatorAvatarUrl": { "type": "string" },
+        "caption": { "type": "string" },
+        "description": { "type": "string" },
+        "hashtags": { "type": "array" },
+        "videoUrl": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "audioTrackTitle": { "type": "string" },
+        "audioArtist": { "type": "string" },
+        "audioUrl": { "type": "string" },
+        "filterPreset": { "type": "string", "enum": ["ORIGINAL", "NEON_CYBER", "NOIR_MONO", "WARM_FILM", "VIVID_POP"] },
+        "overlayText": { "type": "string" },
+        "trimStartMs": { "type": "integer" },
+        "trimEndMs": { "type": "integer" },
+        "volumeLevel": { "type": "number" },
+        "privacy": { "type": "string", "enum": ["PUBLIC", "FOLLOWERS", "PRIVATE"] },
+        "moderationStatus": { "type": "string", "enum": ["APPROVED", "REMOVED"] },
+        "likesCount": { "type": "integer" },
+        "commentsCount": { "type": "integer" },
+        "sharesCount": { "type": "integer" },
+        "viewsCount": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "creatorUsername", "caption", "hashtags", "videoUrl", "audioTrackTitle", "audioArtist", "filterPreset", "trimStartMs", "trimEndMs", "volumeLevel", "privacy", "moderationStatus", "likesCount", "commentsCount", "sharesCount", "viewsCount", "createdAt", "updatedAt"]
+    },
+    "VideoLike": {
+      "title": "VideoLike",
+      "description": "Per-user like marker under a video.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "videoId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "videoId", "createdAt"]
+    },
+    "VideoComment": {
+      "title": "VideoComment",
+      "description": "Comment or threaded reply under a video.",
+      "type": "object",
+      "properties": {
+        "videoId": { "type": "string" },
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "text": { "type": "string" },
+        "parentCommentId": { "type": "string" },
+        "likesCount": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["videoId", "userId", "username", "text", "likesCount", "createdAt", "updatedAt"]
+    },
+    "FollowEdge": {
+      "title": "FollowEdge",
+      "description": "Directed follow relationship between follower and creator.",
+      "type": "object",
+      "properties": {
+        "followerId": { "type": "string" },
+        "followingId": { "type": "string" },
+        "followerUsername": { "type": "string" },
+        "followingUsername": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["followerId", "followingId", "followerUsername", "followingUsername", "createdAt"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Direct message thread between two users.",
+      "type": "object",
+      "properties": {
+        "participantIds": { "type": "array" },
+        "participantNames": { "type": "object" },
+        "lastMessage": { "type": "string" },
+        "lastSenderId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["participantIds", "participantNames", "lastMessage", "lastSenderId", "createdAt", "updatedAt"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Individual direct message inside a conversation.",
+      "type": "object",
+      "properties": {
+        "conversationId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "participantIds": { "type": "array" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["conversationId", "senderId", "participantIds", "text", "createdAt"]
+    },
+    "ModerationReport": {
+      "title": "ModerationReport",
+      "description": "Content or user abuse report submitted for admin review.",
+      "type": "object",
+      "properties": {
+        "reporterId": { "type": "string" },
+        "targetType": { "type": "string", "enum": ["VIDEO", "USER", "COMMENT"] },
+        "targetId": { "type": "string" },
+        "reason": { "type": "string" },
+        "details": { "type": "string" },
+        "status": { "type": "string", "enum": ["OPEN", "REVIEWED", "RESOLVED", "DISMISSED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["reporterId", "targetType", "targetId", "reason", "status", "createdAt", "updatedAt"]
+    },
+    "AdminRole": {
+      "title": "AdminRole",
+      "description": "Trusted server-managed admin allowlist document.",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" }
+      },
+      "required": ["role"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Public creator profiles."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/PrivateUserInfo" },
+      "description": "Owner-only PII and FCM notification token."
+    },
+    "/users/{userId}/blockedUsers/{blockedUid}": {
+      "schema": { "$ref": "#/entities/BlockedUser" },
+      "description": "Users blocked by userId."
+    },
+    "/users/{userId}/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/UserNotification" },
+      "description": "Inbox notifications for userId."
+    },
+    "/videos/{videoId}": {
+      "schema": { "$ref": "#/entities/VideoPost" },
+      "description": "Short videos and metadata."
+    },
+    "/videos/{videoId}/likes/{userId}": {
+      "schema": { "$ref": "#/entities/VideoLike" },
+      "description": "Per-user like records on a video."
+    },
+    "/videos/{videoId}/comments/{commentId}": {
+      "schema": { "$ref": "#/entities/VideoComment" },
+      "description": "Comments and replies on a video."
+    },
+    "/follows/{followId}": {
+      "schema": { "$ref": "#/entities/FollowEdge" },
+      "description": "Directed follow edges keyed as followerId_followingId."
+    },
+    "/conversations/{conversationId}": {
+      "schema": { "$ref": "#/entities/Conversation" },
+      "description": "Direct messaging conversations."
+    },
+    "/conversations/{conversationId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Direct messages inside a conversation."
+    },
+    "/reports/{reportId}": {
+      "schema": { "$ref": "#/entities/ModerationReport" },
+      "description": "User and content moderation reports."
+    },
+    "/admins/{uid}": {
+      "schema": { "$ref": "#/entities/AdminRole" },
+      "description": "Admin role allowlist."
+    }
+  }
+}

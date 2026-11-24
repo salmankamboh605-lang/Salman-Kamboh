@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Salman Video</string>
+    <string name="brand_tagline">CREATE · EDIT · GO VIRAL</string>
+    <string name="auth_welcome_title">Welcome to Salman Video</string>
+    <string name="auth_welcome_subtitle">Sign in with your Google account to stream vertical videos, record with real-time filters, and connect with creators.</string>
+    <string name="action_sign_in_google">Continue with Google</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_discover">Discover</string>
+    <string name="nav_upload">Create</string>
+    <string name="nav_inbox">Inbox</string>
+    <string name="nav_profile">Profile</string>
+    <string name="feed_for_you">For You</string>
+    <string name="feed_following">Following</string>
+    <string name="feed_empty_title">Your Stage Awaits</string>
+    <string name="feed_empty_subtitle">Upload your first short video or load featured creator reels to start watching.</string>
+    <string name="action_load_featured">Load Featured Reels</string>
+    <string name="action_follow">Follow</string>
+    <string name="action_following">Following</string>
+    <string name="action_publish">Publish Video</string>
+    <string name="action_save_profile">Save Profile</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="cd_app_logo">Salman Video logo</string>
+    <string name="cd_like_video">Like video</string>
+    <string name="cd_comment_video">Open comments</string>
+    <string name="cd_share_video">Share video</string>
+    <string name="cd_report_video">Report video</string>
+    <string name="cd_creator_avatar">Creator profile picture</string>
+    <string name="cd_play_pause">Toggle play or pause</string>
+    <string name="cd_record_video">Record video</string>
+    <string name="cd_pick_gallery">Pick video from gallery</string>
+    <string name="cd_flip_camera">Flip camera</string>
+    <string name="cd_admin_panel">Open admin moderation console</string>
+</resources>
